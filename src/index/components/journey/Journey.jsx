@@ -3,10 +3,12 @@ import switchImg from '../../imgs/switch.svg';
 import './Journey.css'
 
 export default function Jounery(props) {
-    const {from,to,exchangeFromTo} = props;
+    const {from,to,exchangeFromTo,showCitySelector} = props;
     return (
         <div className="journey">
-            <div className="journey-station">
+            <div className="journey-station"
+                onClick={() => showCitySelector(true)}
+            >
                 <input 
                     type="text"
                     name="from"
@@ -18,7 +20,9 @@ export default function Jounery(props) {
             <div className="journey-switch" onClick={() => exchangeFromTo()}>
                 <img src={switchImg} width="70" height="40" alt="switch"/>
             </div>
-            <div className="journey-station">
+            <div className="journey-station"
+                onClick={()=> showCitySelector(false)}
+            >
                 <input
                     type="text"
                     readOnly

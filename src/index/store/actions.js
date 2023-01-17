@@ -43,3 +43,110 @@ export function toggleHighSpeed(){
         });
     };
 }
+
+export function hideCitySelector(){
+
+    return {
+        type:ACTION_SET_IS_CITY_SELECTOR_VISIBLE,
+        payload: false,
+    };
+}
+
+export function fetchCityData(){
+    return (dispatch,getState) =>{
+
+        window.console.log("fetching data");
+
+        const { isLoadingCityData} = getState();
+        if(isLoadingCityData){
+            return;
+        }
+
+        const cache = JSON.parse(
+            localStorage.getItem('city_data_cache') || '{}'
+        );
+        
+        if(Date.now() < cache.expires){
+            dispatch(setCityData(cache.setCityData));
+            return;
+        }
+
+        dispatch(setIsLoadingCityData(true));
+
+
+        fetch('./cities.json')
+            .then(res =>res.json())
+            .then(cityData => {
+                dispatch(setCityData(cityData));
+                window.console.log("here is the data",cityData);
+                localStorage.setItem(
+                    'city_data_cache',
+                    JSON.stringify({
+                        expires:Date.now(),
+                        data:cityData,
+                    })
+                );
+                
+                dispatch(setIsLoadingCityData(false));   
+            })
+            .catch(()=>{
+                dispatch(setIsLoadingCityData(false));
+            });
+    };
+}
+
+export function setCityData(cityData){
+    return {
+        type:ACTION_SET_CITY_DATA,
+        payload: cityData,
+    };
+}
+
+export function setSelectedCity(city){
+    return (dispatch,getState) =>{
+        const {currentSelectingLeftCity} = getState();
+        if(currentSelectingLeftCity){
+            dispatch(setFrom(city));
+        } else {
+            dispatch(setTo(city));
+        }
+
+        dispatch(hideCitySelector());
+    }
+}
+
+export function setIsLoadingCityData(isLoadingCityData){
+    return {
+        type:ACTION_SET_IS_LOADING_CITY_DATA,
+        payload: isLoadingCityData,  
+    };
+
+}
+
+export function showCitySelector(currentSelectingLeftCity) {
+    return dispatch => {
+        dispatch({
+            type: ACTION_SET_IS_CITY_SELECTOR_VISIBLE,
+            payload: true,
+        });
+
+        dispatch({
+            type: ACTION_SET_CURRENT_SELECTING_LEFT_CITY,
+            payload: currentSelectingLeftCity,
+        });
+    };
+}
+
+export function hideDateSelector(){  
+    return {
+        type:ACTION_SET_IS_DATE_SELECTOR_VISIBLE,
+        payload:true,
+    }
+}
+
+export function setDepartDate(departDate){
+    return {
+        type: ACTION_SET_DEPART_DATE,
+        payload: departDate,
+    };
+}

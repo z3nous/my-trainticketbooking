@@ -1,0 +1,8 @@
+.date-selector{
+    position:absolute;
+    left:0;
+    right:0;
+    min-height:100%;
+    margin-bottom:70px;
+    z-index:1000;
+}
