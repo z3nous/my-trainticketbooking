@@ -74,7 +74,7 @@ export function fetchCityData(){
         dispatch(setIsLoadingCityData(true));
 
 
-        fetch('./cities.json')
+        fetch('/rest/cities?_' + Date.now())
             .then(res =>res.json())
             .then(cityData => {
                 dispatch(setCityData(cityData));
@@ -140,7 +140,7 @@ export function showCitySelector(currentSelectingLeftCity) {
 export function hideDateSelector(){  
     return {
         type:ACTION_SET_IS_DATE_SELECTOR_VISIBLE,
-        payload:true,
+        payload:false,
     }
 }
 
@@ -148,5 +148,12 @@ export function setDepartDate(departDate){
     return {
         type: ACTION_SET_DEPART_DATE,
         payload: departDate,
+    };
+}
+
+export function showDateSelector(){
+    return {
+        type: ACTION_SET_IS_DATE_SELECTOR_VISIBLE,
+        payload: true,
     };
 }

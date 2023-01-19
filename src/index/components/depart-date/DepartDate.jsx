@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import './DepartDate.css';
 
 export default function DepartDate(props){
-    const {time} = props;
+    const {time,onClick} = props;
 
     const h0ofDepart = h0(time);
     const departDate = new Date(h0ofDepart);
@@ -21,7 +21,7 @@ export default function DepartDate(props){
         (isToday? '(今天)' : '');
 
         return (
-            <div className="depart-date">
+            <div className="depart-date" onClick={onClick}>
                 <input type="hidden" name="date" value={DepartDateString}/>
                 {DepartDateString}<span className="depart-week">{WeekString}</span>
             </div>

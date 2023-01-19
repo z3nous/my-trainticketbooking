@@ -19,6 +19,7 @@ import {
     showCitySelector,
     hideDateSelector,
     setDepartDate,
+    showDateSelector,
   } from './store/actions'
 
 
@@ -79,6 +80,15 @@ function App(props) {
     );  
   },[])
 
+  const departDateCbs = useMemo(() => {
+    return bindActionCreators(
+        {
+            onClick: showDateSelector,
+        },
+        dispatch
+    );
+  }, []);
+
   const onSelectDate = useCallback(day => {
     if (!day) {
         return;
@@ -99,7 +109,7 @@ function App(props) {
       </div>
       <form action="./query.html" className="form">
         <Jounery from={from} to={to} {...cbs} ></Jounery>
-        <DepartDate time={departDate}></DepartDate>
+        <DepartDate time={departDate} {...departDateCbs}></DepartDate>
         <HighSpeed highSpeed={highSpeed} {...highSpeedCbs} />
         <Submit />      
       </form>
