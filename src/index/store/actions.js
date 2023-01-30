@@ -54,9 +54,6 @@ export function hideCitySelector(){
 
 export function fetchCityData(){
     return (dispatch,getState) =>{
-
-        window.console.log("fetching data");
-
         const { isLoadingCityData} = getState();
         if(isLoadingCityData){
             return;
@@ -74,7 +71,7 @@ export function fetchCityData(){
         dispatch(setIsLoadingCityData(true));
 
 
-        fetch('/rest/cities?_' + Date.now())
+        fetch('cities.json')
             .then(res =>res.json())
             .then(cityData => {
                 dispatch(setCityData(cityData));
