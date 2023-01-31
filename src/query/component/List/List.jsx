@@ -26,7 +26,7 @@ const ListItem = memo(function ListItem(props){
 
     return (
         <li className="list-item">
-            <a href="www.baidu.com">
+            <a href={url}>
                 <span className="item-time">
                     <em>{dTime}</em>
                     <br />

@@ -87,5 +87,15 @@ export default {
             default:
         }
         return state;
-    }
+    },
+    isLoadingCityData(state = false, action) {
+        const { type, payload } = action;
+        switch (type) {
+            case ACTION_SET_IS_LOADING_CITY_DATA:
+                return payload;
+            default:
+        }
+
+        return state;
+    },
 }

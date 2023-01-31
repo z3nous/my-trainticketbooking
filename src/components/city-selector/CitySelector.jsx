@@ -221,9 +221,6 @@ const CitySelector = memo(function CitySelector(props){
 export default CitySelector;
 
             
-            // {Boolean(key) && (
-            //     <Suggest searchKey={key} onSelect={key=>onSelect(key)}></Suggest>
-            // )}
 
 
 

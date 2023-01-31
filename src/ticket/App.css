@@ -1,0 +1,16 @@
+.header-wrapper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+.nav-wrapper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 44px;
+}
+.detail-wrapper{
+    margin-top: 44px;
+}
+

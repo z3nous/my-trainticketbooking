@@ -70,16 +70,14 @@ export function fetchCityData(){
 
         dispatch(setIsLoadingCityData(true));
 
-
         fetch('cities.json')
             .then(res =>res.json())
             .then(cityData => {
                 dispatch(setCityData(cityData));
-                window.console.log("here is the data",cityData);
                 localStorage.setItem(
                     'city_data_cache',
                     JSON.stringify({
-                        expires:Date.now(),
+                        expires:Date.now()+ 60 * 1000,
                         data:cityData,
                     })
                 );

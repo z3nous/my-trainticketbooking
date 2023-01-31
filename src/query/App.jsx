@@ -164,6 +164,8 @@ function App(props){
             <List list={trainList}/>
             <Bottom
                 highSpeed={highSpeed}
+                orderType={orderType}
+                onlyTickets={onlyTickets}
                 {...bottomCbs}
             />
         </div>
