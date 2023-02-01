@@ -111,4 +111,14 @@ export default{
 
         return state;
     },
+    isScheduleVisible(state = false, action) {
+        const { type, payload } = action;
+        switch (type) {
+            case ACTION_SET_IS_SCHEDULE_VISIBLE:
+                return payload;
+            default:
+        }
+
+        return state;
+    },
 };

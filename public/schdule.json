@@ -1,0 +1,25 @@
+{
+    "schdule":[
+        {
+            "station": "北京南",
+            "arriveTime": "7:10",
+            "departTime": "07:20",
+            "stay": "10"
+        }, {
+            "station": "天津南",
+            "arriveTime": "07:54",
+            "departTime": "07:56",
+            "stay":"2"
+        }, {
+            "station": "南京南",
+            "arriveTime": "11:51",
+            "departTime": "11:53",
+            "stay": "2"
+        }, {
+            "station": "上海虹桥",
+            "arriveTime": "13:08",
+            "departTime": "13:18",
+            "stay": "10"
+        }
+    ]
+}

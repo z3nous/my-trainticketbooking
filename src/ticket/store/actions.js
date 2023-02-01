@@ -80,3 +80,18 @@ export function setTickets(tickets){
         payload: tickets,
     };
 }
+
+export function toggleIsScheduleVisible(){
+    return (dispatch,getState) => {
+
+        const { isScheduleVisible } = getState();
+        dispatch(setIsScheduleVisible(!isScheduleVisible));
+    };
+}
+
+export function setIsScheduleVisible(isScheduleVisible){
+    return {
+        type: ACTION_SET_IS_SCHEDULE_VISIBLE,
+        payload: isScheduleVisible,
+    };
+}

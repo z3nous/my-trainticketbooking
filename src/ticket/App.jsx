@@ -1,4 +1,4 @@
-import React ,{ useEffect,useCallback,useMemo } from "react";
+import React ,{ useEffect,useCallback,useMemo,Suspense,lazy} from "react";
 import { bindActionCreators } from "redux";
 import { connect, Connect } from "react-redux";
 import URI from 'urijs';
@@ -9,7 +9,8 @@ import Header from '../components/header/header';
 import Nav from '../components/Nav/Nav';
 import useNav from '../custom-hooks/useNav';
 import Detail from '../components/detail/Detail';
-
+import Candidate from "./components/candidate/candidate";
+import { TrainContext } from './context';
 
 import {
     setArriveStation,
@@ -22,8 +23,10 @@ import {
     setDepartTimeStr,
     setDurationStr,
     setTickets,
+    toggleIsScheduleVisible,
 } from './store/actions'
 
+const Schedule = lazy(() => import('./components/schedule/Schedule.jsx'))
 
 function App(props){
     const {
@@ -39,7 +42,10 @@ function App(props){
         searchParsed,
         departTimeStr,
         arriveTimeStr,
+        tickets,
+        isScheduleVisible,
     } = props;
+
 
     const onBack  = useCallback(()=>{
         window.history.back();
@@ -48,7 +54,7 @@ function App(props){
     useEffect(()=>{
         const queries = URI.parseQuery(window.location.search);
         const { aStation, dStation, date, trainNumber } = queries;
-       
+
         dispatch(setDepartStation(dStation));
         dispatch(setArriveStation(aStation));
         dispatch(setTrainNumber(trainNumber));
@@ -71,7 +77,6 @@ function App(props){
         fetch('ticket.json')
             .then(response => response.json())
             .then(result => {
-                window.console.log(result);
                 const { detail, candidates } = result;
                 const {
                     departTimeStr,
@@ -94,6 +99,15 @@ function App(props){
         prevDate,
         nextDate
     );
+
+    const detailCbs = useMemo(()=>{
+        return bindActionCreators(
+            {
+                toggleIsScheduleVisible,
+            },
+            dispatch
+        )
+    },[]);
 
     return (
         <div className="app">
@@ -121,12 +135,37 @@ function App(props){
                     durationStr={durationStr}
                 >
                     <span className="left"></span>
-                    <span className="schedule">
+                    <span 
+                        className="schedule" 
+                        onClick={()=> detailCbs.toggleIsScheduleVisible()}
+                    >
                         时刻表
                     </span>
                     <span className="right"></span>
                 </Detail>
             </div>
+            <TrainContext.Provider
+                value={{
+                    trainNumber,
+                    departStation,
+                    arriveStation,
+                    departDate,
+                }}
+            >
+                <Candidate tickets ={tickets}></Candidate>
+            </TrainContext.Provider>
+            {isScheduleVisible && (
+                <div
+                    className="mask"
+                    onClick={() => dispatch(toggleIsScheduleVisible())}
+                >
+                    <Suspense fallback={<div>loadding</div>}>
+                        <Schedule
+                        
+                        />
+                    </Suspense>
+                </div>
+            )}
         </div>
     )
 }

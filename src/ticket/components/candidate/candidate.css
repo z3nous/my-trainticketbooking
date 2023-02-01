@@ -1,0 +1,109 @@
+.candidate {
+    margin: 15px 0;
+    border-top: 1px solid #eaeaea;
+}
+
+.candidate ul{
+    list-style: none;
+    overflow: hidden;
+    margin:0;
+    padding:0;
+}
+
+.candidate li {
+    background: #fff;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.candidate li .bar {
+    line-height: 42px;
+    padding: 0 15px;
+    overflow:hidden;
+    border-bottom:1px solid #eaeaea;
+}
+
+.candidate li .seat{
+    float:left;
+    font-size: 17px;
+    padding-right:15px;
+    width:70px;
+}
+
+.candidate li .price{
+    float:left;
+    font-size:18px;
+    color:#f90;
+}
+
+.candidate li .price i {
+    font-style: normal;
+    font-size:12px;
+    padding: 0 1px;
+}
+
+.candidate li .num{
+    float: right;
+    font-size: 12px;
+    margin-right: 15px;
+}
+
+.candidate li .btn{
+    border: 1px solid #f90;
+    float:right;
+    color:#f90;
+    width:50px;
+    height:25px;
+    text-align: center;
+    line-height: 25px;
+    position:relative;
+    top:7px;
+    font-size:14px;
+    border-radius: 3px;
+}
+
+.candidate li .channels{
+    overflow: hidden;
+}
+
+.candidate li .channel{
+    padding:8px 15px;
+    display:flex;
+    background:#f7f7f7;
+}
+
+.candidate li .middle{
+    margin-left:23px;
+    flex:1 1;
+}
+
+.candidate li .middle .name{
+    font-size:14px;
+    color:#212121;
+}
+
+.candidate li .middle .desc{
+    margin-top: 2px;
+    font-size: 12px;
+    color: #9e9e9e;
+}
+
+.candidate .buy-wrapper{
+    padding:0 11px;
+    background: rgba(255, 131, 0, 0.04);
+    border: 1px solid #ff8300;
+    border-radius: 4px;
+    height: 28px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    text-decoration: none;
+    display: block;
+}
+
+.candidate .buy{
+    font-size: 14px;
+    color: #ff8300;
+    line-height: 29px;
+}
