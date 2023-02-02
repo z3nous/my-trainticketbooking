@@ -16,7 +16,7 @@ const Channel = memo(function Channel(props){
     } = useContext(TrainContext);
 
     const src = useMemo(() => {
-        return new URI('order')
+        return new URI('Order')
             .setSearch('trainNumber', trainNumber)
             .setSearch('dStation', departStation)
             .setSearch('aStation', arriveStation)
@@ -31,7 +31,7 @@ const Channel = memo(function Channel(props){
                 <div className="name">{name}</div>
                 <div className="desc">{desc}</div>
             </div>
-            <a href="https://www.baidu.com" className="buy-wrapper">
+            <a href={src} className="buy-wrapper">
                 <div className="buy">买票</div>
             </a>
         </div>

@@ -161,7 +161,10 @@ function App(props){
                 >
                     <Suspense fallback={<div>loadding</div>}>
                         <Schedule
-                        
+                            date={departDate}
+                            trainNumber={trainNumber}
+                            departStation={departStation}
+                            arriveStation={arriveStation}
                         />
                     </Suspense>
                 </div>

@@ -6,6 +6,7 @@ import Root from "./index/Root";
 import Query from "./query/query";
 import ErrorPage from "./errorpage";
 import Ticket from "./ticket/ticket";
+import Order from "./order/Order";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     {
         path:"/ticket",
         element:<Ticket/>
+    },
+    {
+        path:"/order",
+        element:<Order/>
     }
 ])
 

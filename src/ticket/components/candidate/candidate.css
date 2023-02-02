@@ -66,6 +66,7 @@
 
 .candidate li .channels{
     overflow: hidden;
+    transition: 0.5s;
 }
 
 .candidate li .channel{
