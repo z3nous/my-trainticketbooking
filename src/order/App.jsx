@@ -1,10 +1,11 @@
-import React, { Component ,useCallback } from 'react';
+import React, { Component ,useCallback , useMemo } from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Header  from '../components/header/header';
 import Detail from '../components/detail/Detail';
 import Ticket from './components/ticket/Ticket';
 import Passengers from './components/passengers/Passengers.jsx';
+import Menu from './components/menu/Menu';
 import URI from 'urijs';
 import dayjs from 'dayjs';
 import {
@@ -15,6 +16,12 @@ import {
     setSeatType,
     setTrainNumber,
     fetchInitial,
+    createAdult,
+    createChild,
+    removePassenger,
+    updatePassenger,
+    showGenderMenu,
+    showTicketTypeMenu,
 }from './store/actions'
 import { bindActionCreators } from 'redux';
 
@@ -34,6 +41,8 @@ function App(props)  {
         seatType,
         price,
         passengers,
+        menu,
+        isMenuVisible,
     } = props;
 
     useEffect(() =>{
@@ -69,12 +78,11 @@ function App(props)  {
                 removePassenger,
                 updatePassenger,
                 showGenderMenu,
-                showFollowAdultMenu,
                 showTicketTypeMenu,
             },
             dispatch
         );
-    },[])
+    },[]);
 
 
     return (
@@ -100,7 +108,8 @@ function App(props)  {
                 </Detail>
             </div>
             <Ticket price={price} type={seatType}/>
-            <Passengers passengers={passengers} />
+            <Passengers passengers={passengers} {...passengersCbs}/>
+            <Menu show={isMenuVisible}/>
         </div>
     );
 

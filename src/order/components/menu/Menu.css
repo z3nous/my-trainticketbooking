@@ -1,0 +1,20 @@
+.menu{
+    position:fixed;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    bottom: 0;
+    transition: all 0.5s;
+    transform:translateY(100%);
+}
+
+.menu.show{
+    transform: translateY(0)
+}
+
+.menu-title {
+    height: 40px;
+    border-radius: 10px 10px 0 0;
+    position: relative;
+    background: #1ba9ba;
+}

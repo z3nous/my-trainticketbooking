@@ -135,5 +135,25 @@ export default {
         }
 
         return state;        
+    },
+    menu(state = null, action){
+        const {type ,payload} = action;
+        switch (type) {
+            case ACTION_SET_MENU:
+                return payload;
+            default:
+        }
+
+        return state;
+    },
+    isMenuVisible(state = false,action){
+        const { type,payload } = action;
+        switch(type){
+            case ACTION_SET_IS_MENU_VISIBLE:
+                return payload;
+            default:
+        }
+
+        return state;
     }
 }

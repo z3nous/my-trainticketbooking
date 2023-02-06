@@ -84,24 +84,28 @@ export function setDepartTimeStr(departTimeStr){
         payload: departTimeStr,
     };
 }
+
 export function setArriveTimeStr(arriveTimeStr){
     return {
         type: ACTION_SET_ARRIVE_TIME_STR,
         payload: arriveTimeStr,
     };
 }
+
 export function setArriveDate(arriveDate){
     return {
         type: ACTION_SET_ARRIVE_DATE,
         payload: arriveDate,
     };
 }
+
 export function setDurationStr(durationStr){
     return {
         type: ACTION_SET_DURATION_STR,
         payload: durationStr,
     };
 }
+
 export function setPrice(price) {
     return {
         type: ACTION_SET_PRICE,
@@ -115,9 +119,11 @@ let passengerIdSeed = 0;
 export function createAdult(){
     return (dispatch, getState) => {
         const { passengers } = getState();
-
+        
+        //实时更改所以需要知道当前的所有售票乘客状态
         for (let passenger of passengers){
-            const keys = Object.keys(passengers);
+            //如果乘客有信息没有填写那么就不新增加乘客列表
+            const keys = Object.keys(passenger);
             for (let key of keys) {
                 if(!passenger[key]){
                     return;
@@ -127,6 +133,7 @@ export function createAdult(){
 
         dispatch(
             setPassengers([
+                //添加新的乘客
                 ...passengers,
                 {
                     id: ++passengerIdSeed,
@@ -167,6 +174,7 @@ export function createChild() {
             }
         }
 
+        //可以直接使用alert对页面进行提醒
         if (!adultFound) {
             alert('请至少正确添加一个同行成人');
             return;
@@ -192,11 +200,11 @@ export function createChild() {
 export function removePassenger(id){
     return (dispatch,getState) => {
         const { passengers } = getState();
-
+        //filter是选择数组中满足条件的内容
         const newPassengers = passengers.filter(passenger => {
             return passenger.id !== id && passenger.followAdult !== id;
         });
-
+        //每次更新操作就是更新数组，对数组整体更新
         dispatch(setPassengers(newPassengers));
     };
 }
@@ -222,21 +230,22 @@ export function updatePassenger(id, data, keysToBeRemoved = []) {
     };
 }
 
-export function showGenderMenu(id){
+export function showGenderMenu(id) {
     return (dispatch, getState) => {
+        window.console.log("gender menu");
         const { passengers } = getState();
 
         const passenger = passengers.find(passenger => passenger.id === id);
 
-        if (!passenger) {
+        if(!passenger) {
             return;
         }
 
         dispatch(
             showMenu({
                 onPress(gender) {
-                    dispatch(updatePassenger(id, { gender }));
-                    dispatch(hideMenu());
+                    dispatch(updatePassenger(id,{gender}));
+                    dispatch(hideMenu())
                 },
                 options: [
                     {
@@ -252,46 +261,41 @@ export function showGenderMenu(id){
                 ],
             })
         );
-    };
+    }
 }
 
-export function showFollowAdultMenu(id){
-    return (dispatch, getState) => {
-        const { passengers } = getState();
+export function showMenu(menu){
+    return dispatch => {
+        dispatch(setMenu(menu));
+        dispatch(setIsMenuVisible(true));
+    }
+}
 
-        const passenger = passengers.find(passenger => passenger.id === id);
+export function setMenu(menu){
+    return {
+        type:ACTION_SET_MENU,
+        payload:menu,
+    }
+}
 
-        if (!passenger) {
-            return;
-        }
+export function setIsMenuVisible(isMenuVisible){
+    return {
+        type:ACTION_SET_IS_MENU_VISIBLE,
+        payload:isMenuVisible,
+    }
+}
 
-        dispatch(
-            showMenu({
-                onPress(followAdult) {
-                    dispatch(updatePassenger(id, { followAdult }));
-                    dispatch(hideMenu());
-                },
-                options: passengers
-                    .filter(passenger => passenger.ticketType === 'adult')
-                    .map(adult => {
-                        return {
-                            title: adult.name,
-                            value: adult.id,
-                            active: adult.id === passenger.followAdult,
-                        };
-                    }),
-            })
-        );
-    };
+export function hideMenu(){
+    return setIsMenuVisible(false);
 }
 
 export function showTicketTypeMenu(id){
-    return (dispatch, getState) => {
-        const { passengers } = getState();
+    return (dispatch,getState) => {
+        const { passengers } =getState();
 
-        const passenger = passengers.find(passenger => passenger.id === id);
+        const passenger = passengers.filter( passenger => passenger.id === id );
 
-        if (!passenger) {
+        if(!passenger) {
             return;
         }
 
@@ -347,7 +351,7 @@ export function showTicketTypeMenu(id){
                         value: 'child',
                         active: 'child' === passenger.ticketType,
                     },
-                ],
+                ]
             })
         );
     };

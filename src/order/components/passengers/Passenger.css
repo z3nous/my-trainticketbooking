@@ -1,0 +1,110 @@
+.passengers{
+    background-color: #fff;
+    margin: 10px 0;
+}
+
+.passengers ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.passenger{
+    position: relative;
+    padding-left:54px;
+}
+
+.passenger .delete {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    margin-top: -9px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 10px;
+    border: 1px solid red;
+    font-size: 12px;
+    font-style: normal;
+    color: red;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.passengers .add {
+    display: flex;
+    position: relative;
+    border-top: 1px solid #dcdfe0;
+    color: #1ba9ba;
+}
+
+.passenger .items {
+    list-style:none;
+}
+
+.passenger .items .item{
+    position: relative;
+    height:44px;
+    line-height:44px;
+    font-size:0;
+    display: flex;
+    border-bottom: 1px solid #dcdfe0;
+}
+
+.passenger .items .item label.label {
+    display: inline-block;
+    width: 60px;
+    font-size: 13px;
+}
+
+.passenger .items .item label.ticket-type {
+    width:70px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 13px;
+    color: #333;
+}
+
+.passenger .items .item label.ticket-type::after {
+    position: absolute;
+    content: '';
+    width: 11px;
+    height: 6px;
+    top: 50%;
+    right: 15px;
+    margin-top: -3px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAMCAYAAABm+U3GAAAAbUlEQVR42p3OwQnAQAhEUUvZErZMu9jSUkJKMA4kCBEZmMNHmMNDiwhz951d7zWtMmBiWNmdBa6I75+xvo8PRopzFB2YgEdcRQsW8Amd4AHnKHYCDzhBGUzwCeUwwTsqwB1vqA4XTlAFLrxQDj+3MTlro/oAUgAAAABJRU5ErkJggg==)
+        no-repeat;
+    background-size: 100%;
+}
+
+.passenger .items .item .input {
+    margin: 10px auto;
+    height: 24px;
+    line-height: 24px;
+    border: 0;
+    border-left: 1px solid #dcdfe0;
+    text-indent: 10px;
+    flex: 1;
+    font-size: 15px;
+    outline: 0;
+}
+
+.passenger .items .item .input.name {
+    padding-right: 70px;
+}
+
+.passengers .add .adult ,
+.passengers .add .child{
+    margin: 10px 0;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 16px;
+    flex: 1;
+}
+
+.passengers .add .child{
+    border-left:1px solid #dcdfe0;
+}
