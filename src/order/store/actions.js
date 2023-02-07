@@ -232,7 +232,7 @@ export function updatePassenger(id, data, keysToBeRemoved = []) {
 
 export function showGenderMenu(id) {
     return (dispatch, getState) => {
-        window.console.log("gender menu");
+
         const { passengers } = getState();
 
         const passenger = passengers.find(passenger => passenger.id === id);
@@ -293,7 +293,7 @@ export function showTicketTypeMenu(id){
     return (dispatch,getState) => {
         const { passengers } =getState();
 
-        const passenger = passengers.filter( passenger => passenger.id === id );
+        const passenger = passengers.find( passenger => passenger.id === id );
 
         if(!passenger) {
             return;
@@ -314,13 +314,16 @@ export function showTicketTypeMenu(id){
                             )
                         );
                     } else {
+
                         const adult = passengers.find(
                             passenger =>
                                 passenger.id === id &&
                                 passenger.ticketType === 'adult'
                         );
+                        
+                        const length = passengers.length;
 
-                        if (adult) {
+                        if (length > 1 && adult) {
                             dispatch(
                                 updatePassenger(
                                     id,
@@ -352,6 +355,36 @@ export function showTicketTypeMenu(id){
                         active: 'child' === passenger.ticketType,
                     },
                 ]
+            })
+        );
+    };
+}
+
+export function showFollowAdultMenu(id){
+    return(dispatch,getState) => {
+        const { passengers } = getState();
+
+        const passenger = passengers.find(passenger => passenger.id === id);
+
+        if(!passenger) {
+            return;
+        }
+
+        dispatch(
+            showMenu({
+                onPress(followAdult) {
+                    dispatch(updatePassenger(id, { followAdult }));
+                    dispatch(hideMenu());
+                },
+                options: passengers
+                    .filter(passenger => passenger.ticketType === 'adult')
+                    .map(adult => {
+                        return {
+                            title: adult.name,
+                            value: adult.id,
+                            active: adult.id === passenger.followAdult,
+                        };
+                    }),
             })
         );
     };

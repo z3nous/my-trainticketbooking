@@ -6,8 +6,11 @@ import Detail from '../components/detail/Detail';
 import Ticket from './components/ticket/Ticket';
 import Passengers from './components/passengers/Passengers.jsx';
 import Menu from './components/menu/Menu';
+import Choose from './components/choose/Choose.jsx';
+import Account from './components/account/Account.jsx';
 import URI from 'urijs';
 import dayjs from 'dayjs';
+import './App.css';
 import {
     setArriveStation,
     setDepartDate,
@@ -22,7 +25,9 @@ import {
     updatePassenger,
     showGenderMenu,
     showTicketTypeMenu,
-}from './store/actions'
+    hideMenu,
+    showFollowAdultMenu,
+} from './store/actions'
 import { bindActionCreators } from 'redux';
 
 function App(props)  {
@@ -79,11 +84,29 @@ function App(props)  {
                 updatePassenger,
                 showGenderMenu,
                 showTicketTypeMenu,
+                showFollowAdultMenu,
             },
             dispatch
         );
     },[]);
 
+    const menuCbs = useMemo(()=>{
+        return bindActionCreators(
+            {
+                hideMenu,
+            },
+            dispatch
+        );
+    },[]);
+
+    const chooseCbs = useMemo(()=>{
+        return bindActionCreators(
+            {
+                updatePassenger,
+            },
+            dispatch
+        );
+    },[]);
 
     return (
         <div className="app">
@@ -109,7 +132,13 @@ function App(props)  {
             </div>
             <Ticket price={price} type={seatType}/>
             <Passengers passengers={passengers} {...passengersCbs}/>
-            <Menu show={isMenuVisible}/>
+            {passengers.length >0 && (
+                <Choose passengers={passengers} {...chooseCbs}/>
+            )}
+            <div className="fixed-wrap">
+                <Account length={passengers.length} price={price}/>
+            </div>
+            <Menu show={isMenuVisible} {...menu} {...menuCbs} />
         </div>
     );
 

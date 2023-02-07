@@ -1,5 +1,4 @@
 .passengers{
-    background-color: #fff;
     margin: 10px 0;
 }
 
@@ -12,7 +11,10 @@
 .passenger{
     position: relative;
     padding-left:54px;
+    margin-bottom: 7px;
+    background-color: #fff;
 }
+
 
 .passenger .delete {
     position: absolute;
@@ -36,6 +38,8 @@
     position: relative;
     border-top: 1px solid #dcdfe0;
     color: #1ba9ba;
+    margin-top:10px;
+    background-color: #fff;
 }
 
 .passenger .items {
@@ -49,6 +53,10 @@
     font-size:0;
     display: flex;
     border-bottom: 1px solid #dcdfe0;
+}
+
+.passenger .items .item:last-of-type {
+    border-bottom: 0;
 }
 
 .passenger .items .item label.label {

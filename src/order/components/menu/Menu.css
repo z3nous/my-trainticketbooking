@@ -12,9 +12,33 @@
     transform: translateY(0)
 }
 
+.menu-mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
+
 .menu-title {
     height: 40px;
     border-radius: 10px 10px 0 0;
     position: relative;
     background: #1ba9ba;
+}
+
+.menu ul li {
+    text-align: center;
+    background: #fff;
+    border-bottom: 1px solid #dcdfe0;
+    color: #666;
+    font-size: 16px;
+    line-height: 48px;
+    height: 48px;
+}
+
+
+.menu ul li.active {
+    color: #1ba9ba;
 }

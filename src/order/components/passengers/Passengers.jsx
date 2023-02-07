@@ -11,11 +11,12 @@ const Passenger = memo(function Passenger(props){
         onUpdate,
         gender,
         birthday,
-        followAdultName,
+        followAdult,
         showGenderMenu,
         showTicketTypeMenu,
+        showFollowAdultMenu,
     } = props;
-
+    
     const isAdult = ticketType === 'adult';
 
     return(
@@ -97,7 +98,8 @@ const Passenger = memo(function Passenger(props){
                             type="text"
                             className="input followAdult"
                             placeholder="请选择"
-                            value={followAdultName}
+                            value={followAdult}
+                            onClick={() => showFollowAdultMenu(id)}
                             readOnly
                         />
                     </li>
@@ -117,9 +119,9 @@ const Passengers = memo(function Passengers(props){
         updatePassenger,
         showGenderMenu,
         showTicketTypeMenu,
+        showFollowAdultMenu,
     } = props;
     
-
 
     //key应该在使用map的地方调用
     return(
@@ -134,6 +136,7 @@ const Passengers = memo(function Passengers(props){
                             onUpdate={updatePassenger}
                             showGenderMenu={showGenderMenu}
                             showTicketTypeMenu={showTicketTypeMenu}
+                            showFollowAdultMenu={showFollowAdultMenu}
                         />
                     );
                 })}

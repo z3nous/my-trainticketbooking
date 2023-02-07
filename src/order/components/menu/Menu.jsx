@@ -3,10 +3,13 @@ import classnames from 'classnames';
 import './Menu.css'
 
 const MenuItem = memo(function MenuItem(props){
-    const {title , active} = props;
+    const {title , active , onPress,value} = props;
     return (
         <li
             className={classnames({ active })}
+            onClick={() => {
+                onPress(value);
+            }}
         >
             {title}
         </li>
@@ -15,7 +18,7 @@ const MenuItem = memo(function MenuItem(props){
 
 
 const Menu = memo(function Menu(props) {
-    const {show,options,hideMenu} = props;
+    const {show,options,hideMenu,onPress} = props;
     return(
         <div>
             {show && (
@@ -30,6 +33,7 @@ const Menu = memo(function Menu(props) {
                                 <MenuItem
                                     key={option.value}
                                     {...option}
+                                    onPress={onPress}
                                 ></MenuItem>
                             );
                     })}
