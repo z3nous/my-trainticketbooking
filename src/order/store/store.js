@@ -16,7 +16,7 @@ export default createStore(
         arriveTimeStr: null,
         durationStr: null,
         price: null,
-        passengers: [],
+        passengers: [],   
         menu: null,
         isMenuVisible: false,
         searchParsed: false,

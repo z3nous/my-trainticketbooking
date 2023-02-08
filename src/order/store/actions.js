@@ -13,6 +13,8 @@ export const ACTION_SET_MENU = 'SET_MENU';
 export const ACTION_SET_IS_MENU_VISIBLE = 'SET_IS_MENU_VISIBLE';
 export const ACTION_SET_SEARCH_PARSED = 'SET_SEARCH_PARSED';
 
+let child_pasgr = [];
+let adult_pasgr = [];
 
 export function setDepartStation(departStation){
     return {
@@ -131,6 +133,16 @@ export function createAdult(){
             }
         }
 
+        adult_pasgr = 
+        [...adult_pasgr,               
+            {
+            id: ++passengerIdSeed,
+            name: '',
+            ticketType: 'adult',
+            licenceNo: '',
+            seat: 'Z',
+        }]
+
         dispatch(
             setPassengers([
                 //添加新的乘客
@@ -179,6 +191,16 @@ export function createChild() {
             alert('请至少正确添加一个同行成人');
             return;
         }
+        
+        child_pasgr = 
+        [...child_pasgr,               
+            {
+            id: ++passengerIdSeed,
+            name: '',
+            ticketType: 'child',
+            licenceNo: '',
+            seat: 'Z',
+        }]
 
         dispatch(
             setPassengers([
@@ -315,22 +337,22 @@ export function showTicketTypeMenu(id){
                         );
                     } else {
 
-                        const adult = passengers.find(
+                        const adults = passengers.filter(
                             passenger =>
-                                passenger.id === id &&
                                 passenger.ticketType === 'adult'
+                                && passenger.id !== id
                         );
-                        
-                        const length = passengers.length;
 
-                        if (length > 1 && adult) {
+                        const length = adults.length;
+
+                        if (length > 0 ) {
                             dispatch(
                                 updatePassenger(
                                     id,
                                     {
                                         ticketType,
                                         gender: '',
-                                        followAdult: adult.id,
+                                        followAdult: adults[0].name,
                                         birthday: '',
                                     },
                                     ['licenceNo']
